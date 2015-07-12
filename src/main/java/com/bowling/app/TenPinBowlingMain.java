@@ -5,11 +5,14 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.bowling.exception.InvalidDataException;
 import com.bowling.model.Frame;
 import com.bowling.service.BowlingService;
 import com.bowling.service.BowlingServiceImpl;
+
+import static com.bowling.util.BowlingUtils.*;
 
 /**
  * This is the Standalone Java class for Ten Pin Bowling Game.
@@ -111,10 +114,11 @@ public class TenPinBowlingMain {
 		Frame frame = null;
 
 		Iterator<String> listItr = scores.listIterator();
+		AtomicInteger sequence = new AtomicInteger(1);
 
 		while (listItr.hasNext()) {
 			frame = new Frame();
-			frame.setId();
+			frame.setId(sequence.getAndIncrement());
 			frame.setFirst(getNextInt(listItr.next()));
 
 			// Check if second ball is allowed
@@ -153,11 +157,4 @@ public class TenPinBowlingMain {
 		return nextInt;
 	}
 
-	private static boolean isTrue(String boolStr) {
-		boolean isTrue = "true".equalsIgnoreCase(boolStr)
-				|| "t".equalsIgnoreCase(boolStr)
-				|| "yes".equalsIgnoreCase(boolStr)
-				|| "y".equalsIgnoreCase(boolStr);
-		return isTrue;
-	}
 }

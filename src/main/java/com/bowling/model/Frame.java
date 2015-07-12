@@ -1,6 +1,5 @@
 package com.bowling.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This class represents a Frame in the Bowling game.
@@ -10,20 +9,17 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Frame {
 
-	/** Auto generates Frame IDs. */
-	private static AtomicInteger sequence = new AtomicInteger(1);
-
 	public Frame() {
 	}
 
-	public Frame(int first, int second) {
-		setId();
+	public Frame(int id, int first, int second) {
+		setId(id);
 		setFirst(first);
 		setSecond(second);
 	}
 
-	public Frame(int first, int second, int bonus) {
-		this(first, second);
+	public Frame(int id, int first, int second, int bonus) {
+		this(id, first, second);
 		setBonus(bonus);
 	}
 
@@ -37,8 +33,8 @@ public class Frame {
 		return id;
 	}
 
-	public void setId() {
-		this.id = sequence.getAndIncrement();
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	/**
